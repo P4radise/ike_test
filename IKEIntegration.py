@@ -9,13 +9,14 @@ from datetime import datetime, timedelta
 class Integration():
     LEN_CANDIDATE_NAME_LIST = 150
 
-    def __init__(self, url_onevizion="", login_onevizion="", pass_onevizion="", url_ike="", login_ike="", pass_ike=""):
+    def __init__(self, url_onevizion="", login_onevizion="", pass_onevizion="", url_ike="", login_ike="", pass_ike="", amount_of_days=""):
         self.url_onevizion = self.url_setting(url_onevizion)
         self.auth_onevizion = HTTPBasicAuth(login_onevizion, pass_onevizion)
 
         self.url_ike = self.url_setting(url_ike)
         self.login_ike = login_ike
         self.pass_ike = pass_ike
+        self.amount_of_days = amount_of_days
 
         self.fm_list_request = onevizion.Trackor(trackorType='ike_field_mapping', URL=self.url_onevizion, userName=login_onevizion, password=pass_onevizion)
 
@@ -67,7 +68,7 @@ class Integration():
             raise Exception(answer.text)
 
     def get_ike_job_list(self, department_list):
-        previous_week = str((datetime.now() - timedelta(days=7)).strftime('%Y-%m-%dT%H:%M:%S'))
+        previous_week = str((datetime.now() - timedelta(days=self.amount_of_days)).strftime('%Y-%m-%dT%H:%M:%S'))
         for department in department_list:
             department_id = department['id']
 
