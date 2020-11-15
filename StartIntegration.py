@@ -12,5 +12,7 @@ url_ike = password_data["urlIKE"]
 login_ike = password_data["loginIKE"]
 pass_ike = password_data["passIKE"]
 
-ike_integration = Integration(url_onevizion, login_onevizion, pass_onevizion, url_ike, login_ike, pass_ike)
+amount_of_days = password_data["amountOfDays"]
+
+ike_integration = Integration(url_onevizion, login_onevizion, pass_onevizion, url_ike, login_ike, pass_ike, amount_of_days)
 ike_integration.start_integration()
